@@ -8,6 +8,10 @@ public class AppDbContext : DbContext
     {
     }
 
+    public DbSet<GtfsStop> Stops { get; set; }
+    public DbSet<GtfsRoute> Routes { get; set; }
+    public DbSet<GtfsTrip> Trips { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
