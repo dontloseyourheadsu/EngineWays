@@ -1,8 +1,11 @@
 <Solution>
   <Folder Name="/backend/">
     <Project Path="backend/EngineWays.Backend/EngineWays.Backend.csproj" />
+    <Project Path="backend/EngineWays.IngestionWorker/EngineWays.IngestionWorker.csproj" />
   </Folder>
   <Folder Name="/frontend/">
     <Project Path="frontend/EngineWays.Frontend/EngineWays.Frontend.csproj" />
   </Folder>
+  <Project Path="EngineWays.AppHost/EngineWays.AppHost.csproj" />
+  <Project Path="EngineWays.ServiceDefaults/EngineWays.ServiceDefaults.csproj" />
 </Solution>
