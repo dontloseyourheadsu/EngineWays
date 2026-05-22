@@ -4,7 +4,6 @@ namespace EngineWays.Backend.Infrastructure;
 
 public class GtfsStop
 {
-    [Key]
     public string StopId { get; set; } = default!;
     public string? StopCode { get; set; }
     public string StopName { get; set; } = default!;
@@ -19,7 +18,6 @@ public class GtfsStop
 
 public class GtfsRoute
 {
-    [Key]
     public string RouteId { get; set; } = default!;
     public string? AgencyId { get; set; }
     public string RouteShortName { get; set; } = default!;
@@ -33,7 +31,6 @@ public class GtfsRoute
 
 public class GtfsTrip
 {
-    [Key]
     public string TripId { get; set; } = default!;
     public string RouteId { get; set; } = default!;
     public string ServiceId { get; set; } = default!;
