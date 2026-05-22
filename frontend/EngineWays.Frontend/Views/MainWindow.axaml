@@ -7,30 +7,121 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="EngineWays.Frontend.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        Name="RootWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="EngineWays.Frontend">
+        Title="EngineWays.Frontend"
+        Background="#F5F5F5">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
     <Grid>
-        <map:MapControl Name="MapControl" />
-        
-        <!-- Floating UI placeholder (similar to prototype.html) -->
-        <Border Margin="20" Padding="15" Background="White" CornerRadius="8" 
-                BoxShadow="0 4 15 0 #20000000"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Width="350">
-            <StackPanel Spacing="10">
-                <TextBlock Text="EngineWays CDMX" FontSize="20" FontWeight="Bold" Foreground="#e91e63" />
-                <TextBox PlaceholderText="Origin" Text="Current Location" />
-                <TextBox PlaceholderText="Destination" Text="Palacio de Bellas Artes" />
-                <Button Content="+ Add Stop" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="LightGray" BorderThickness="1" />
-                <UniformGrid Columns="3">
-                    <Button Content="Metro" HorizontalAlignment="Stretch" />
-                    <Button Content="Walk" HorizontalAlignment="Stretch" />
-                    <Button Content="Bike" HorizontalAlignment="Stretch" />
-                </UniformGrid>
+        <map:MapControl Name="MapControl" Background="#E0E0E0" />
+
+        <Border Margin="20"
+                Padding="20"
+                Classes="card"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="380">
+            <StackPanel Spacing="14">
+                <TextBlock Text="EngineWays" Classes="h1" />
+
+                <StackPanel>
+                    <TextBlock Text="ORIGIN" Classes="input-label" />
+                    <TextBox Classes="route-input"
+                             Text="{Binding Origin}"
+                             PlaceholderText="Your current location" />
+                </StackPanel>
+
+                <ItemsControl ItemsSource="{Binding Stops}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="STOP POINT" Classes="input-label" />
+                                    <TextBox Classes="route-input"
+                                             Text="{Binding Name}"
+                                             PlaceholderText="Stop location..." />
+                                </StackPanel>
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        Command="{Binding DataContext.RemoveStopCommand, ElementName=RootWindow}"
+                                        CommandParameter="{Binding}"
+                                        Content="x"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Foreground="#F44336"
+                                        Padding="6,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Button Classes="add-stop"
+                        Content="+ Add Stop Point"
+                        Command="{Binding AddStopCommand}"
+                        HorizontalAlignment="Stretch" />
+
+                <StackPanel>
+                    <TextBlock Text="DESTINATION" Classes="input-label" />
+                    <TextBox Classes="route-input"
+                             Text="{Binding Destination}"
+                             PlaceholderText="Where to?" />
+                </StackPanel>
+
+                <ItemsControl ItemsSource="{Binding Modes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton Classes="mode-btn"
+                                          IsChecked="{Binding IsSelected}"
+                                          Command="{Binding DataContext.SelectModeCommand, ElementName=RootWindow}"
+                                          CommandParameter="{Binding}">
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Icon}" FontSize="14" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding Name}" FontSize="11" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </ToggleButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Border BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="0,1,0,0"
+                        Padding="0,14,0,0">
+                    <StackPanel Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="{Binding TotalMinutes, StringFormat='{}{0} min'}"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource TextBrush}" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding TotalDistanceKm, StringFormat='{}{0:0.0} km'}"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       VerticalAlignment="Bottom" />
+                        </Grid>
+
+                        <ItemsControl ItemsSource="{Binding Steps}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="20,*" ColumnSpacing="12">
+                                        <Border Classes="step-icon" Background="{Binding Color}" />
+                                        <StackPanel Grid.Column="1" Spacing="2">
+                                            <TextBlock Text="{Binding Title}" FontSize="13" FontWeight="SemiBold" />
+                                            <TextBlock Text="{Binding Description}" FontSize="12" Foreground="{StaticResource MutedTextBrush}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
             </StackPanel>
         </Border>
     </Grid>
