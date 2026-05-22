@@ -3,13 +3,104 @@
              x:Class="EngineWays.Frontend.App"
              xmlns:local="using:EngineWays.Frontend"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-  
+
+    <Application.Resources>
+        <Color x:Key="PrimaryColor">#E91E63</Color>
+        <Color x:Key="PrimaryDarkColor">#C2185B</Color>
+        <Color x:Key="TextColor">#2B2B2B</Color>
+        <Color x:Key="MutedTextColor">#6D6D6D</Color>
+        <Color x:Key="BorderColor">#DDDDDD</Color>
+        <Color x:Key="CardColor">#FFFFFF</Color>
+        <Color x:Key="MetroOrange">#FF5722</Color>
+        <Color x:Key="BikeGreen">#4CAF50</Color>
+        <Color x:Key="WalkGray">#9E9E9E</Color>
+
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+        <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDarkColor}" />
+        <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+        <SolidColorBrush x:Key="MutedTextBrush" Color="{StaticResource MutedTextColor}" />
+        <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+        <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}" />
+        <SolidColorBrush x:Key="MetroBrush" Color="{StaticResource MetroOrange}" />
+        <SolidColorBrush x:Key="BikeBrush" Color="{StaticResource BikeGreen}" />
+        <SolidColorBrush x:Key="WalkBrush" Color="{StaticResource WalkGray}" />
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
+
+        <Style Selector="Window">
+            <Setter Property="FontFamily" Value="Inter" />
+        </Style>
+
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.input-label">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style Selector="TextBox.route-input">
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="White" />
+        </Style>
+
+        <Style Selector="TextBox.route-input:focus">
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+        </Style>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{StaticResource CardBrush}" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="BoxShadow" Value="0 10 30 0 #1F000000" />
+        </Style>
+
+        <Style Selector="Button.add-stop">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style Selector="Button.add-stop:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+        </Style>
+
+        <Style Selector="ToggleButton.mode-btn">
+            <Setter Property="Background" Value="#F1F1F1" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}" />
+        </Style>
+
+        <Style Selector="ToggleButton.mode-btn:checked">
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Border.step-icon">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Background" Value="{StaticResource BorderBrush}" />
+        </Style>
     </Application.Styles>
 </Application>
