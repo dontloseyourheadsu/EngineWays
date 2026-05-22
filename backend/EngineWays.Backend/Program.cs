@@ -17,8 +17,10 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<EngineWays.Backend.Features.Routing.IRoutingEngine, EngineWays.Backend.Features.Routing.StubRoutingEngine>();
 
 // Configure EF Core with PostgreSQL via Aspire
 builder.AddNpgsqlDbContext<AppDbContext>("engineways");
